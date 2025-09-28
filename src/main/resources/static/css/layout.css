@@ -1,0 +1,77 @@
+/* Stili generali */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Contenitore principale dell'applicazione */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.app-header .logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+/* Corpo principale (sidebar + content) */
+.app-body {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Sidebar (menu) */
+.app-sidebar {
+    width: 220px;
+    background-color: #2c3e50;
+    padding: 20px;
+    color: #ecf0f1;
+    flex-shrink: 0;
+}
+.app-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.app-sidebar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+}
+.app-sidebar a:hover {
+    background-color: #34495e;
+}
+
+/* Area contenuto principale */
+.app-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}

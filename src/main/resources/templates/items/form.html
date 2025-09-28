@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Gestione Articolo</title>
+    <style>
+        form { max-width: 500px; }
+        div { margin-bottom: 1em; }
+        label { display: block; margin-bottom: .2em; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        .button-bar { margin-top: 1.5em; }
+        .button-bar button, .button-bar a { padding: 10px 15px; border: none; border-radius: 5px; color: white; text-decoration: none; }
+        .save-button { background-color: #007bff; }
+        .cancel-link { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h1 th:if="${item.id == null}">Crea Nuovo Articolo</h1>
+    <h1 th:if="${item.id != null}">Modifica Articolo</h1>
+
+    <form th:action="@{/items/save}" th:object="${item}" method="post">
+        <!-- Campo nascosto per l'ID, necessario per l'aggiornamento -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label for="codeItem">Codice Articolo:</label>
+            <input type="text" id="codeItem" th:field="*{codeItem}" required />
+        </div>
+
+        <div>
+            <label for="description">Descrizione:</label>
+            <input type="text" id="description" th:field="*{description}" required />
+        </div>
+
+        <div>
+            <label for="barcode">Barcode:</label>
+            <input type="text" id="barcode" th:field="*{barcode}" />
+        </div>
+
+        <div>
+            <label for="unitOfMeasure">Unità di Misura:</label>
+            <select id="unitOfMeasure" th:field="*{unitOfMeasure}" required>
+                <option value="">-- Seleziona --</option>
+                <option th:each="unit : ${units}"
+                        th:value="${unit}"
+                        th:text="${unit}">...</option>
+            </select>
+        </div>
+
+        <div class="button-bar">
+            <button type="submit" class="save-button">Salva</button>
+            <a th:href="@{/items}" class="cancel-link">Annulla</a>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

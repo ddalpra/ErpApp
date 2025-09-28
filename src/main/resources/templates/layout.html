@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">ErpApp</title>
+    
+    <!-- CSS Globale -->
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    
+    <!-- Eventuali CSS specifici della pagina -->
+    <th:block layout:fragment="styles"></th:block>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="app-body">
+            <!-- Menu Laterale -->
+            <div th:replace="~{fragments/menu :: menu}"></div>
+            
+            <!-- Contenuto Principale della Pagina -->
+            <main class="app-content" layout:fragment="content"></main>
+        </div>
+
+        <!-- Footer -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+</body>
+</html>

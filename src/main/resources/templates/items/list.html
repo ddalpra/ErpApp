@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Lista Articoli</title>
+    <!-- Simple styling for better readability -->
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        .actions a { margin-right: 10px; }
+        .add-button { margin-bottom: 1em; display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h1>Lista Articoli da LogisticApp</h1>
+
+    <a th:href="@{/items/new}" class="add-button">Crea Nuovo Articolo</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Codice</th>
+                <th>Descrizione</th>
+                <th>Unità di Misura</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.codeItem}">...</td>
+                <td th:text="${item.description}">...</td>
+                <td th:text="${item.unitOfMeasure}">...</td>
+                <td class="actions">
+                    <a th:href="@{/items/edit/{id}(id=${item.id})}">Modifica</a>
+                    <a th:href="@{/items/delete/{id}(id=${item.id})}" onclick="return confirm('Sei sicuro di voler eliminare questo articolo?');">Elimina</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(items)}">
+                <td colspan="4">Nessun articolo trovato.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
