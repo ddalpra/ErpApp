@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Dettaglio Endpoint</title>
+    <style>
+        form { max-width: 600px; }
+        div { margin-bottom: 1em; }
+        label { display: block; margin-bottom: .2em; }
+        input[type=text], input[type=url] { width: 100%; padding: 8px; box-sizing: border-box; }
+        .button-bar { margin-top: 1.5em; }
+        .button-bar button, .button-bar a { padding: 10px 15px; border: none; border-radius: 5px; color: white; text-decoration: none; }
+        .save-button { background-color: #007bff; }
+        .cancel-link { background-color: #6c757d; }
+        .checkbox-group { display: flex; align-items: center; }
+        .checkbox-group input { width: auto; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1 th:if="${endpoint.id == null}">Nuovo Endpoint</h1>
+    <h1 th:if="${endpoint.id != null}">Modifica Endpoint</h1>
+
+    <form th:action="@{/admin/endpoints/save}" th:object="${endpoint}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label for="serviceName">Nome Servizio (es. LOGISTIC_API)</label>
+            <input type="text" id="serviceName" th:field="*{serviceName}" required />
+        </div>
+
+        <div>
+            <label for="baseUrl">Base URL (es. http://localhost:8080/api/v1)</label>
+            <input type="url" id="baseUrl" th:field="*{baseUrl}" required />
+        </div>
+
+        <div>
+            <label for="description">Descrizione</label>
+            <input type="text" id="description" th:field="*{description}" />
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="enabled" th:field="*{enabled}" />
+            <label for="enabled">Abilitato</label>
+        </div>
+
+        <div class="button-bar">
+            <button type="submit" class="save-button">Salva</button>
+            <a th:href="@{/admin/endpoints}" class="cancel-link">Annulla</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

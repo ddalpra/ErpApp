@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import it.ddalpra.acme.erpApp.item.config.WebClientConfig;
 import it.ddalpra.acme.erpApp.item.entity.Item;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,10 +13,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class ItemApiClient {
 
+    private static final String LOGISTIC_SERVICE_NAME = "LOGISTIC_API";
     private final WebClient webClient;
 
-    public ItemApiClient(WebClient logisticWebClient) {
-        this.webClient = logisticWebClient;
+    public ItemApiClient(WebClientConfig webClientConfig) {
+        this.webClient = webClientConfig.getWebClient(LOGISTIC_SERVICE_NAME);
     }
 
     public Flux<Item> getAllItems() {

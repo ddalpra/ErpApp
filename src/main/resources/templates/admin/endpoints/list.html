@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Gestione Web Service</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        .actions a { margin-right: 10px; }
+        .add-button { margin-bottom: 1em; display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; border-radius: 5px; text-decoration: none; }
+        .status-enabled { color: green; font-weight: bold; }
+        .status-disabled { color: red; }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1>Gestione Endpoint Web Service</h1>
+
+    <a th:href="@{/admin/endpoints/new}" class="add-button">Nuovo Endpoint</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Servizio</th>
+                <th>Base URL</th>
+                <th>Descrizione</th>
+                <th>Stato</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ep : ${endpoints}">
+                <td th:text="${ep.serviceName}">...</td>
+                <td th:text="${ep.baseUrl}">...</td>
+                <td th:text="${ep.description}">...</td>
+                <td>
+                    <span th:if="${ep.enabled}" class="status-enabled">Abilitato</span>
+                    <span th:unless="${ep.enabled}" class="status-disabled">Disabilitato</span>
+                </td>
+                <td class="actions">
+                    <a th:href="@{/admin/endpoints/edit/{id}(id=${ep.id})}">Modifica</a>
+                    <a th:href="@{/admin/endpoints/delete/{id}(id=${ep.id})}" onclick="return confirm('Sei sicuro?');">Elimina</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
