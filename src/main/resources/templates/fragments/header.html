@@ -2,9 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
     <header class="app-header" th:fragment="header">
-        <!-- Assumendo che il logo sia in /static/images/logo.png -->
+    <div class="header-left">
         <img th:src="@{/images/logo.png}" alt="Logo Azienda" class="logo"/>
         <h1>ErpApp</h1>
-    </header>
+    </div>
+
+    <div class="header-right"  th:fragment="header">
+        <!-- Se l'utente è autenticato -->
+        <div th:if="${isAuthenticated}">
+            <span><strong th:text="${fullName}">User</strong></span>
+            <form th:action="@{/logout}" method="post" style="display:inline; margin-left: 10px;">
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </div>
+
+        <!-- Se l'utente NON è autenticato -->
+        <div th:unless="${isAuthenticated}">
+            <a th:href="@{/oauth2/authorization/keycloak}" class="btn-login">Login</a>
+        </div>
+    </div>
+</header>
 </body>
 </html>
