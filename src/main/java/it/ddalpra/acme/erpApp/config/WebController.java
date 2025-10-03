@@ -6,8 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import it.ddalpra.acme.erpApp.item.client.ItemApiClient;
+
 @Controller
 public class WebController {
+
+    private final ItemApiClient itemApiClient;
+
+    public WebController(ItemApiClient itemApiClient) {
+        this.itemApiClient = itemApiClient;
+    }
 
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
@@ -15,10 +23,20 @@ public class WebController {
             // Se l'utente è autenticato, aggiungi i suoi dettagli al modello
             model.addAttribute("username", principal.getPreferredUsername());
             model.addAttribute("isAuthenticated", true);
+            model.addAttribute("fullName", principal.getFullName());
+            model.addAttribute("email", principal.getEmail());
+
+            // Aggiungiamo il conteggio degli articoli
+            Long itemCount = itemApiClient.getAllItems().count().block();
+            model.addAttribute("itemCount", itemCount);
+
+            model.addAttribute("idToken", principal.getIdToken().getTokenValue());
+            return "dashboard"; 
         } else {
             model.addAttribute("isAuthenticated", false);
+            return "index"; 
         }
-        return "index"; // Ritorna il template index.html
+        //return "index"; // Ritorna il template index.html
     }
 
     // DEVE esistere un metodo che gestisca l'URL "/dashboard"
@@ -28,6 +46,11 @@ public class WebController {
             model.addAttribute("isAuthenticated", true);
             model.addAttribute("fullName", principal.getFullName());
             model.addAttribute("email", principal.getEmail());
+
+            // Aggiungiamo il conteggio degli articoli anche qui
+            Long itemCount = itemApiClient.getAllItems().count().block();
+            model.addAttribute("itemCount", itemCount);
+
             model.addAttribute("idToken", principal.getIdToken().getTokenValue());
             return "dashboard"; 
         } else {
