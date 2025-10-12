@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.ddalpra.acme.erpApp.item.client.ItemApiClient;
 import it.ddalpra.acme.erpApp.item.entity.Item;
+import it.ddalpra.acme.erpApp.item.entity.ItemStatus;
 import it.ddalpra.acme.erpApp.item.entity.UnitOfMeasure;
 
 
@@ -43,6 +44,7 @@ public class ItemWebController {
     public String showCreateForm(Model model) {
         model.addAttribute("item", new Item());
         model.addAttribute("units", UnitOfMeasure.values()); // Passa le unità di misura al form
+        model.addAttribute("itemStatus", ItemStatus.values());
         return "items/form"; // Ritorna il nome del file HTML (form.html)
     }
 
@@ -54,6 +56,7 @@ public class ItemWebController {
         Item item = itemApiClient.getItemById(id).block();
         model.addAttribute("item", item);
         model.addAttribute("units", UnitOfMeasure.values());
+        model.addAttribute("itemStatus", ItemStatus.values()); // Aggiungi questo
         return "items/form";
     }
 

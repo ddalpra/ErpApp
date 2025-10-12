@@ -51,6 +51,17 @@
             </select>
         </div>
 
+        <div>
+            <label for="status">Stato:</label>
+            <select id="status" th:field="*{status}" required>
+                <option value="">-- Seleziona --</option>
+                <option th:each="itemst : ${itemStatus}"
+                        th:value="${itemst}"
+                        th:text="${itemst.description}"></option>
+            </select>
+        </div>
+
+
         <div class="button-bar">
             <button type="submit" class="save-button">Salva</button>
             <a th:href="@{/items}" class="cancel-link">Annulla</a>

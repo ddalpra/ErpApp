@@ -67,7 +67,7 @@
 
         <h1>Lista Articoli da LogisticApp</h1>
 
-        <a th:href="@{/items/new}" class="add-button">Crea Nuovo Articolo</a>
+        <a th:href="@{/items/new}" class="btn btn-success btn-sm">Crea Nuovo Articolo</a>
 
         <table>
             <thead>
@@ -76,6 +76,7 @@
                     <th>Descrizione</th>
                     <th>Unità di Misura</th>
                     <th>Azioni</th>
+                    <th>Stato</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,10 +84,11 @@
                     <td th:text="${item.codeItem}">...</td>
                     <td th:text="${item.description}">...</td>
                     <td th:text="${item.unitOfMeasure}">...</td>
+                    <td th:text="${item.status}">...</td>
                     <td class="actions">
-                        <a th:href="@{/items/edit/{id}(id=${item.id})}" class="btn btn-primary d-inline-flex align-items-center" >Modifica</a>
+                        <a th:href="@{/items/edit/{id}(id=${item.id})}" class="btn btn-primary btn-sm d-inline-flex align-items-center" >Modifica</a>
                         <a th:href="@{/items/delete/{id}(id=${item.id})}"
-                            onclick="return confirm('Sei sicuro di voler eliminare questo articolo?');">Elimina</a>
+                            onclick="return confirm('Sei sicuro di voler eliminare questo articolo?');" class="btn btn-danger btn-sm d-inline-flex align-items-center">Elimina</a>
                     </td>
                 </tr>
                 <tr th:if="${#lists.isEmpty(items)}">

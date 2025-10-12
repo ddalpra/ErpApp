@@ -19,7 +19,7 @@
 <div layout:fragment="content">
     <h1>Gestione Endpoint Web Service</h1>
 
-    <a th:href="@{/admin/endpoints/new}" class="add-button">Nuovo Endpoint</a>
+    <a th:href="@{/admin/endpoints/new}" class="btn btn-success btn-sm">Nuovo Endpoint</a>
 
     <table>
         <thead>
@@ -41,8 +41,8 @@
                     <span th:unless="${ep.enabled}" class="status-disabled">Disabilitato</span>
                 </td>
                 <td class="actions">
-                    <a th:href="@{/admin/endpoints/edit/{id}(id=${ep.id})}">Modifica</a>
-                    <a th:href="@{/admin/endpoints/delete/{id}(id=${ep.id})}" onclick="return confirm('Sei sicuro?');">Elimina</a>
+                    <a th:href="@{/admin/endpoints/edit/{id}(id=${ep.id})}" class="btn btn-success btn-sm d-inline-flex align-items-center">Modifica</a>
+                    <a th:href="@{/admin/endpoints/delete/{id}(id=${ep.id})}" class="btn btn-danger btn-sm d-inline-flex align-items-center" onclick="return confirm('Sei sicuro?');">Elimina</a>
                 </td>
             </tr>
         </tbody>

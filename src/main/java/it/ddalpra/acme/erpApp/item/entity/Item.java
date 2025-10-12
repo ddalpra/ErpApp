@@ -25,5 +25,6 @@ public class Item {
     private String creationUser;
     private LocalDateTime modificationDate;
     private String modificationUser;
+    private ItemStatus status;
 
 }
